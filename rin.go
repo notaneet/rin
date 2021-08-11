@@ -1,8 +1,8 @@
 package rin
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/itsjamie/gin-cors"
 	"time"
 )
 
@@ -13,14 +13,13 @@ type Rin struct {
 // New creates a Rin application instance
 func New() *Rin {
 	engine := gin.Default()
-	engine.Use(cors.Middleware(cors.Config{
-		Origins:        "*",
-		Methods:        "GET, PUT, POST, DELETE",
-		RequestHeaders: "Origin, Authorization, Content-Type",
-		ExposedHeaders: "",
+	engine.Use(cors.New(cors.Config{
+		AllowAllOrigins: true,
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"GET", "PUT", "POST", "DELETE"},
+		AllowHeaders: []string{"Origin", "Authorization", "Content-Type"},
 		MaxAge: 50 * time.Second,
-		Credentials: true,
-		ValidateHeaders: false,
+		AllowCredentials: true,
 	}))
 
 	return &Rin{Engine: engine}
