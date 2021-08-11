@@ -15,7 +15,6 @@ func New() *Rin {
 	engine := gin.Default()
 	engine.Use(cors.New(cors.Config{
 		AllowAllOrigins: true,
-		AllowOrigins: []string{"*"},
 		AllowMethods: []string{"GET", "PUT", "POST", "DELETE"},
 		AllowHeaders: []string{"Origin", "Authorization", "Content-Type"},
 		MaxAge: 50 * time.Second,
